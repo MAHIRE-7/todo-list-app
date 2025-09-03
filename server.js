@@ -10,14 +10,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// MySQL connection
 // MySQL connection using env vars
-const mysql = require('mysql2'); // mysql2 is recommended
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  host: process.env.DB_HOST ,
+  user: process.env.DB_USER ,
+  password: process.env.DB_PASSWORD ,
+  database: process.env.DB_NAME 
 });
 
 db.connect(err => {
