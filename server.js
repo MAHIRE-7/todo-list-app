@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 // MySQL connection using env vars
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
+  host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'root1234',
   database: process.env.DB_NAME || 'serverdb'
@@ -27,9 +27,9 @@ db.connect(err => {
 });
 
 // Create database and table if they don't exist
-db.execute(`CREATE DATABASE IF NOT EXISTS todoapp`);
-db.execute(`USE todoapp`);
-db.execute(`
+db.query(`CREATE DATABASE IF NOT EXISTS todoapp`);
+db.query(`USE todoapp`);
+db.query(`
   CREATE TABLE IF NOT EXISTS todos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     text VARCHAR(255) NOT NULL,
